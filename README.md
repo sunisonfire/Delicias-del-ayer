@@ -178,10 +178,10 @@ Este proyecto permite demostrar conocimientos en:
 
 ## 👨‍💻 Autor
 
-Proyecto académico desarrollado como práctica de desarrollo Frontend utilizando tecnologías web nativas.
-
+@sunisonfire
 ---
 
-## 📄 Licencia
+## Google Sheets:
 
-Este proyecto fue desarrollado con fines educativos y de aprendizaje.
+https://docs.google.com/spreadsheets/d/1_MJcTO6xAbyx_-4e_w9hk-RZj3wWY8TYWRvrfUyaQF8/edit?gid=0#gid=0
+
