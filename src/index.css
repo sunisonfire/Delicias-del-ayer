@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:ital,wght@0,200..800;1,200..800&family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display-lg: "Bricolage Grotesque", sans-serif;
+  --font-headline-lg: "Bricolage Grotesque", sans-serif;
+  --font-body-md: "Be Vietnam Pro", sans-serif;
+  --font-body-lg: "Be Vietnam Pro", sans-serif;
+  --font-label-md: "Space Mono", monospace;
+  --font-handwritten-accent: "Epilogue", sans-serif;
+  
+  --color-surface: #fff8f6;
+  --color-surface-dim: #f8d1cb;
+  --color-surface-bright: #fff8f6;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #fff0ee;
+  --color-surface-container: #ffe9e5;
+  --color-surface-container-high: #ffe2dd;
+  --color-surface-container-highest: #ffdad4;
+  --color-on-surface: #2b1613;
+  --color-on-surface-variant: #534247;
+  --color-inverse-surface: #422a26;
+  --color-inverse-on-surface: #ffedea;
+  --color-outline: #867277;
+  --color-outline-variant: #d8c1c6;
+  --color-surface-tint: #964261;
+  --color-primary: #964261;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #f48fb1;
+  --color-on-primary-container: #722544;
+  --color-inverse-primary: #ffb0c9;
+  --color-secondary: #6b5a60;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #f4dce4;
+  --color-on-secondary-container: #716066;
+  --color-tertiary: #865300;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #f09b16;
+  --color-on-tertiary-container: #5e3900;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-primary-fixed: #ffd9e2;
+  --color-primary-fixed-dim: #ffb0c9;
+  --color-on-primary-fixed: #3e001e;
+  --color-on-primary-fixed-variant: #792b4a;
+  --color-secondary-fixed: #f4dce4;
+  --color-secondary-fixed-dim: #d7c1c8;
+  --color-on-secondary-fixed: #25181e;
+  --color-on-secondary-fixed-variant: #524249;
+  --color-tertiary-fixed: #ffddb9;
+  --color-tertiary-fixed-dim: #ffb961;
+  --color-on-tertiary-fixed: #2b1700;
+  --color-on-tertiary-fixed-variant: #663e00;
+  --color-background: #fff8f6;
+  --color-on-background: #2b1613;
+  --color-surface-variant: #ffdad4;
+}
+
+/* Custom styles and keyframes */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+  50% { transform: translateY(-12px) rotate(1.5deg); }
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sparkleEffect {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.animate-floatY {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotateSlow 25s linear infinite;
+}
+
+.animate-sparkle-effect {
+  animation: sparkleEffect 3s ease-in-out infinite;
+}
+
+.sticker-shadow {
+  filter: drop-shadow(4px 4px 0px rgba(62, 39, 35, 1));
+}
+
+.sticker-shadow-hover {
+  transition: all 0.2s ease-in-out;
+}
+.sticker-shadow-hover:hover {
+  transform: translate(-2px, -2px) rotate(0.5deg);
+  filter: drop-shadow(6px 6px 0px rgba(62, 39, 35, 1));
+}
+.sticker-shadow-hover:active {
+  transform: translate(2px, 2px);
+  filter: drop-shadow(2px 2px 0px rgba(62, 39, 35, 1));
+}
+
+.grid-pattern {
+  background-image: radial-gradient(#d8c1c6 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+.tape-effect {
+  background: rgba(254, 243, 199, 0.7);
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.05);
+  backdrop-filter: blur(1px);
+}
+
+.scallop-divider-top {
+  height: 24px;
+  width: 100%;
+  background-image: radial-gradient(circle at 12px -3px, transparent 12px, #fff8f6 13px);
+  background-size: 24px 24px;
+}
+
+.scallop-divider-bottom {
+  height: 24px;
+  width: 100%;
+  background-image: radial-gradient(circle at 12px 27px, transparent 12px, #fff8f6 13px);
+  background-size: 24px 24px;
+}
+
+/* Hide scrollbars but keep scrolling working */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 3D Rotating Animation and perspective rules */
+@keyframes rotate3D {
+  0% {
+    transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg);
+  }
+  50% {
+    transform: rotateX(-10deg) rotateY(180deg) rotateZ(8deg);
+  }
+  100% {
+    transform: rotateX(15deg) rotateY(360deg) rotateZ(0deg);
+  }
+}
+
+.animate-rotate-3d {
+  transform-style: preserve-3d;
+  animation: rotate3D 22s infinite linear;
+}
+
+/* --- NOCHE MÁGICA THEME OVERRIDES --- */
+body.noche-magica {
+  background-color: #0d0813 !important;
+  color: #eedbff !important;
+}
+
+/* Base text color overrides */
+body.noche-magica p,
+body.noche-magica span:not(#cart-badge):not(#theme-emoji),
+body.noche-magica h1,
+body.noche-magica h2,
+body.noche-magica h3,
+body.noche-magica h4,
+body.noche-magica h5 {
+  color: #eedbff !important;
+}
+
+/* Maintain special neon text color for specific titles/subtitles */
+body.noche-magica .text-\[\#964261\], 
+body.noche-magica .text-\[\#722544\],
+body.noche-magica h1.text-\[\#964261\] {
+  color: #ff7ebb !important;
+}
+
+body.noche-magica .text-\[\#534247\] {
+  color: #c9bccc !important;
+}
+
+/* Navigation headers and dropdown menus */
+body.noche-magica header {
+  background-color: rgba(13, 8, 19, 0.88) !important;
+  border-bottom: 2px solid rgba(255, 75, 130, 0.35) !important;
+}
+
+/* Background patterns & gradients */
+body.noche-magica .grid-pattern {
+  background-image: radial-gradient(rgba(255, 75, 130, 0.15) 1.5px, transparent 1.5px) !important;
+}
+
+/* Elements/Cards backings */
+body.noche-magica .bg-white,
+body.noche-magica .fav-card,
+body.noche-magica .catalog-item,
+body.noche-magica .album-stamp,
+body.noche-magica .bg-\[\#fffcfb\],
+body.noche-magica .bg-\[\#fff8f6\],
+body.noche-magica .bg-\[\#fff2f0\],
+body.noche-magica #cart-drawer-overlay > div:nth-child(2) {
+  background-color: #191226 !important;
+  border-color: rgba(255, 75, 130, 0.3) !important;
+  color: #eedbff !important;
+}
+
+/* Adhesive/Washi adhesive tape effects */
+body.noche-magica .bg-\[\#ffe9e5\]\/80 {
+  background-color: rgba(255, 75, 130, 0.25) !important;
+  border-color: rgba(255, 75, 130, 0.5) !important;
+}
+
+/* Special button highlights */
+body.noche-magica .bg-\[\#964261\] {
+  background-color: #ff4b82 !important;
+  color: #ffffff !important;
+  border-color: #ffffff20 !important;
+}
+body.noche-magica .bg-\[\#964261\]:hover {
+  background-color: #ff6a99 !important;
+}
+
+/* Star ratings / sweetness display overrides */
+body.noche-magica .bg-\[\#ffe9e5\] {
+  background-color: #2b173a !important;
+  border-color: rgba(255, 75, 130, 0.3) !important;
+  color: #ff7ebb !important;
+}
+
+body.noche-magica .bg-\[\#fff8f6\] {
+  background-color: #211632 !important;
+}
+
+body.noche-magica .border-\[\#d8c1c6\]\/80,
+body.noche-magica .border-\[\#d8c1c6\]\/50,
+body.noche-magica .border-\[\#d8c1c6\]\/30,
+body.noche-magica .border-\[\#d8c1c6\] {
+  border-color: rgba(255, 75, 130, 0.25) !important;
+}
+
+/* Theme selector button customized styling */
+body.noche-magica #btn-toggle-theme {
+  background-color: #1d1134 !important;
+  border-color: rgba(255, 75, 130, 0.6) !important;
+  color: #ff7ebb !important;
+}
+body.noche-magica #btn-toggle-theme #theme-label {
+  color: #ff7ebb !important;
+}
+
+/* Floating emojis / stickers */
+body.noche-magica .animate-floatY {
+  opacity: 0.55 !important;
+  filter: drop-shadow(0px 0px 10px rgba(255, 75, 130, 0.45));
+}
+
+/* Golden details / highlights on badges & buttons */
+body.noche-magica .bg-\[\#ffddb9\] {
+  background-color: #1a3c22 !important; /* Green glowing success block for 'Abierto' */
+  border-color: #22c55e !important;
+  color: #4ade80 !important;
+}
+body.noche-magica .bg-\[\#ffddb9\] span.bg-green-500 {
+  background-color: #4ade80 !important;
+}
+
+body.noche-magica .bg-\[\#f09b16\] {
+  background-color: #ff9f1c !important;
+  color: #ffffff !important;
+}
+
+/* Sticker/Polaroids shadows redefined in neon magenta glow */
+body.noche-magica .sticker-shadow {
+  filter: drop-shadow(4px 4px 0px rgba(255, 75, 130, 0.6)) !important;
+}
+body.noche-magica .sticker-shadow-hover:hover {
+  filter: drop-shadow(6px 6px 0px rgba(255, 75, 130, 0.8)) !important;
+}
+
+/* Forms input tags, selectors and details lists options */
+body.noche-magica input:not([type="submit"]):not([type="button"]),
+body.noche-magica select,
+body.noche-magica textarea {
+  background-color: #1e132e !important;
+  color: #eedbff !important;
+  border: 1px solid rgba(255, 75, 130, 0.45) !important;
+}
+
+/* Modals overlays backgrounds */
+body.noche-magica #detail-modal .relative,
+body.noche-magica #stamps-album-modal .relative,
+body.noche-magica #login-modal .relative,
+body.noche-magica #delete-confirm-modal .relative,
+body.noche-magica #cart-drawer-overlay .bg-white {
+  background-color: #140c21 !important;
+  border: 3px solid #ff4b82 !important;
+  color: #eedbff !important;
+}
+
+body.noche-magica #btn-close-detail,
+body.noche-magica #btn-close-stamps-album-header,
+body.noche-magica #btn-close-login {
+  background-color: #241438 !important;
+  color: #ff7ebb !important;
+  border-color: rgba(255, 75, 130, 0.4) !important;
+}
+
+body.noche-magica #cart-drawer-footer {
+  background-color: #211433 !important;
+  border-top: 1px dashed rgba(255, 75, 130, 0.35) !important;
+}
+
+/* Scallops dividers dynamic borders */
+body.noche-magica .scallop-divider-top {
+  background-image: radial-gradient(circle at 12px -3px, transparent 12px, #0d0813 13px) !important;
+}
+body.noche-magica .scallop-divider-bottom {
+  background-image: radial-gradient(circle at 12px 27px, transparent 12px, #0d0813 13px) !important;
+}
+
+/* Hamburger color */
+body.noche-magica #hamburger-icon {
+  color: #ff7ebb !important;
+}
+
+/* Category menu list chips overrides */
+body.noche-magica .category-chip {
+  background-color: #1a1226 !important;
+  border-color: rgba(255, 75, 130, 0.35) !important;
+  color: #eedbff !important;
+}
+body.noche-magica .category-chip.bg-\[\#964261\] {
+  background-color: #ff4b82 !important;
+  border-color: #ff4b82 !important;
+  color: #ffffff !important;
+}
+
+/* Mobile dropdown background */
+body.noche-magica #mobile-dropdown {
+  background-color: #12091e !important;
+  border-color: rgba(255, 75, 130, 0.3) !important;
+}
+body.noche-magica #mobile-dropdown button {
+  color: #eedbff !important;
+}
+body.noche-magica #mobile-dropdown button#btn-mobile-login {
+  background-color: #ff4b82 !important;
+  color: #ffffff !important;
+}
+
+

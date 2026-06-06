@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delicias del Ayer - Pastelería Kawaii Vintage</title>
+    <!-- Tailwind CSS CDN for local VS Code Live Server support -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body class="bg-[#fff8f6] text-[#2b1613] font-sans min-h-screen selection:bg-[#ffd9e2] selection:text-[#722544] overflow-x-hidden">
+    
+    <!-- HEADER -->
+    <header class="bg-[#fff8f6]/85 backdrop-blur-md fixed top-0 w-full z-40 border-b border-[#d8c1c6] shadow-sm transition-all duration-300">
+      <div class="flex justify-between items-center w-full px-4 md:px-10 py-3.5 max-w-[1240px] mx-auto">
+        
+        <!-- Logo Container -->
+        <div class="flex items-center gap-4">
+          <button 
+            id="nav-logo"
+            class="group text-left rotate-[-3deg] bg-white px-4 py-1 pb-1.5 border-2 border-[#964261] rounded-2xl sticker-shadow transition-all hover:scale-105 hover:rotate-[-1deg] cursor-pointer inline-flex items-center gap-2"
+            style="font-family: 'Bricolage Grotesque', sans-serif;"
+          >
+            <span class="text-2xl md:text-3xl group-hover:scale-115 transition-transform duration-250">🍰</span>
+            <div class="flex flex-col -space-y-1">
+              <span class="text-[#964261] font-extrabold text-base md:text-xl leading-tight">Delicias</span>
+              <span class="text-[9px] md:text-[10px] font-bold text-[#865300] tracking-widest font-mono">DEL AYER</span>
+            </div>
+          </button>
+          
+          <!-- Open Status Badge -->
+          <div id="badge-store-status" class="hidden sm:flex items-center gap-2 bg-[#ffddb9] text-[#2b1700] px-3 py-1 rounded-full border border-[#865300] text-xs font-semibold" style="font-family: 'Space Mono', monospace;">
+            <span id="badge-store-dot" class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span id="badge-store-text">Open</span>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8 text-sm" style="font-family: 'Space Mono', monospace;">
+          <button 
+            id="link-hero" 
+            class="text-[#964261] font-bold border-b-2 border-[#964261] pb-0.5 hover:opacity-95 transition-opacity cursor-pointer"
+          >
+            Inicio
+          </button>
+          <button 
+            id="link-favourites" 
+            class="text-[#534247] font-medium hover:text-[#964261] transition-colors cursor-pointer"
+          >
+            Favoritos
+          </button>
+          <button 
+            id="link-catalog" 
+            class="text-[#534247] font-medium hover:text-[#964261] transition-colors cursor-pointer"
+          >
+            Menú
+          </button>
+          <button 
+            id="link-scrapbook" 
+            class="text-[#534247] font-medium hover:text-[#964261] transition-colors cursor-pointer"
+          >
+            Form
+          </button>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+          <!-- Theme Toggle Button -->
+          <button 
+            id="btn-toggle-theme"
+            class="flex items-center justify-center bg-white hover:bg-[#ffe9e5] text-[#964261] w-9 h-9 rounded-full border border-[#d8c1c6] hover:border-[#964261] transition-all duration-300 cursor-pointer text-sm select-none shadow-sm active:scale-95 group"
+            title="Cambiar tema de ensueño"
+          >
+            <span id="theme-emoji" class="transition-transform group-hover:scale-125 duration-200">🌙</span>
+          </button>
+
+          <!-- Shopping Basket Button -->
+          <button 
+            id="btn-open-cart"
+            class="relative p-2.5 rounded-full hover:bg-[#ffe9e5] transition-colors duration-200 group text-[#964261] cursor-pointer"
+            aria-label="Abrir canasta"
+          >
+            <svg class="w-6 h-6 group-hover:scale-110 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 11-1 9"></path>
+              <path d="m19 11-4-7"></path>
+              <path d="M2 11h20"></path>
+              <path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"></path>
+              <path d="m4.5 11 4-7"></path>
+              <path d="m9 11 1 9"></path>
+            </svg>
+            
+            <span 
+              id="cart-badge"
+              class="hidden absolute -top-1.5 -right-1.5 bg-[#f48fb1] text-[#722544] text-[11px] font-bold h-5 min-w-5 px-1 rounded-full border border-[#964261] flex items-center justify-center animate-bounce"
+              style="font-family: monospace;"
+            >
+              0
+            </span>
+          </button>
+
+          <!-- Login Button -->
+          <button 
+            id="btn-header-login"
+            class="hidden sm:flex items-center gap-2 bg-[#964261] text-[#ffffff] hover:bg-[#964261]/95 text-xs font-semibold px-5 py-2 rounded-full border-2 border-white sticker-shadow active:translate-y-1 active:shadow-none transition-all cursor-pointer"
+          >
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span id="header-user-text">Iniciar Sesión</span>
+          </button>
+
+          <!-- Mobile Hamburger -->
+          <button 
+            id="btn-mobile-menu" 
+            class="md:hidden p-2 text-[#964261] cursor-pointer"
+            aria-label="Menú"
+          >
+            <svg id="hamburger-icon" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div 
+        id="mobile-dropdown"
+        class="hidden md:hidden bg-[#fff8f6] border-b border-[#d8c1c6] px-4 py-4 space-y-3 flex flex-col items-stretch shadow-md"
+      >
+        <div class="flex items-center justify-between pb-2 border-b border-[#d8c1c6]/30">
+          <span class="text-xs text-[#534247]" style="font-family: 'Space Mono', monospace;">Navegación</span>
+          <div id="mob-badge-store-status" class="flex items-center gap-1.5 bg-[#ffddb9] text-[#2b1700] px-2 py-0.5 rounded-full border border-[#865300] text-[10px] font-semibold">
+            <span id="mob-badge-store-dot" class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+            <span id="mob-badge-store-text">Open</span>
+          </div>
+        </div>
+        <button id="mob-link-hero" class="text-left font-semibold py-1.5 text-[#964261] cursor-pointer">Inicio</button>
+        <button id="mob-link-favourites" class="text-left font-medium py-1.5 text-[#534247] hover:text-[#964261] cursor-pointer">Favoritos</button>
+        <button id="mob-link-catalog" class="text-left font-medium py-1.5 text-[#534247] hover:text-[#964261] cursor-pointer">Menú</button>
+        <button id="mob-link-scrapbook" class="text-left font-medium py-1.5 text-[#534247] hover:text-[#964261] cursor-pointer">Form</button>
+        <button id="btn-mobile-login" class="w-full bg-[#964261] text-[#ffffff] py-2.5 rounded-full font-semibold border-2 border-white sticker-shadow text-center text-sm cursor-pointer">Iniciar Sesión</button>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section 
+      id="hero-section" 
+      class="relative min-h-[92vh] pt-32 pb-16 flex flex-col items-center justify-center overflow-hidden grid-pattern"
+    >
+      <!-- Background 3D Rotating Cake -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden select-none">
+        <div class="relative w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] md:w-[620px] md:h-[620px] opacity-[0.22] flex items-center justify-center" style="perspective: 1200px;">
+          <!-- Spinning background dashed paper sticker ring -->
+          <div class="absolute inset-2 bg-[#ffd9e2]/30 rounded-full border-[3px] border-dashed border-[#964261]/25 animate-rotate-slow"></div>
+          
+          <img 
+            class="w-full h-full object-contain animate-rotate-3d drop-shadow-[0_15px_15px_rgba(150,66,97,0.15)]" 
+            alt="Pastel de Fresas Vintage"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsEGXHE3SYZglBmgNK3i4H_AoQn6au1fhx-r-OqBH-VdPyrQm3DAFly-EuLTWK5mIZZQdUHy9S_ZsaTUNZXcLUQl0J4o-NPspkIIjGXduCOjqfFitm45iSpV1cULad_dSWcuarmTolDg8b67NI-NxW80UjKbmYCcWL5fjqGxR79caS_w8iZn5ZUeP1iYarZyI3wc5F01r4Js7761I_HL-sUlLYbYrKA9rb6fVvu83SC1U3KNDK6X1fhozPsB13NFttrZ4ipwVXzPs"
+            referrerpolicy="no-referrer"
+          />
+        </div>
+      </div>
+
+      <!-- Decorative Interactive Floating Background Elements -->
+      <div class="absolute inset-0 pointer-events-none opacity-20">
+        <div class="absolute top-24 left-10 md:left-24 animate-floatY" style="animation-delay: 0s">
+          <span class="text-6xl md:text-7xl select-none">🍪</span>
+        </div>
+        <div class="absolute bottom-28 right-8 md:right-24 animate-floatY" style="animation-delay: 2s">
+          <span class="text-6xl md:text-8xl select-none">🍰</span>
+        </div>
+        <div class="absolute top-1/2 left-8 md:left-40 animate-floatY" style="animation-delay: 1.5s">
+          <span class="text-5xl md:text-7xl select-none">🍦</span>
+        </div>
+        <div class="absolute bottom-1/2 right-12 md:right-48 animate-floatY" style="animation-delay: 3.5s">
+          <span class="text-5xl md:text-6xl select-none">🍩</span>
+        </div>
+      </div>
+
+      <!-- Main Container Content -->
+      <div class="relative z-10 text-center px-4 max-w-[1200px] mx-auto flex flex-col items-center">
+        <!-- Nostalgic Greeting Title -->
+        <h1 class="font-display-lg text-3xl sm:text-4xl md:text-6xl font-extrabold text-[#964261] leading-tight max-w-4xl mx-auto mb-5 tracking-tight px-2" style="font-family: 'Bricolage Grotesque', sans-serif;">
+          Cada bocado te transporta a tus recuerdos más dulces.
+        </h1>
+        
+        <!-- Soft supportive description -->
+        <p class="text-[#534247] text-base md:text-lg max-w-2xl mx-auto mb-8 px-4 leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">
+          Recetas transmitidas de generación en generación, horneadas diariamente con ingredientes puros del rancho y una pizca de amor y nostalgia. ¡Colecciona recuerdos comestibles hoy!
+        </p>
+
+        <!-- Discovery Action Button -->
+        <div class="mt-8 relative z-20">
+          <button 
+            id="btn-discover"
+            class="group bg-[#f09b16] text-[#ffffff] px-10 py-3.5 rounded-full text-lg md:text-xl font-bold border-[3px] border-white sticker-shadow hover:translate-y-0.5 hover:shadow-none active:translate-y-1 transition-all cursor-pointer inline-flex items-center gap-2"
+            style="font-family: 'Bricolage Grotesque', sans-serif;"
+          >
+            <span>Descubrir la Magia</span>
+            <svg class="w-5 h-5 animate-pulse text-yellow-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Decorative Scallop Bottom Divider -->
+      <div class="absolute bottom-0 w-full scallop-divider-bottom z-10"></div>
+    </section>
+
+    <!-- FAVOURITES SECTION -->
+    <section id="favourites-section" class="bg-[#fff0ee] py-16 md:py-20 overflow-hidden relative">
+      <div class="max-w-[1240px] mx-auto px-4 md:px-10">
+        
+        <!-- Header Block with Navigation Arrows -->
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-12 gap-4">
+          <div>
+            <span class="text-[#865300] text-lg md:text-xl block mb-2 font-medium italic" style="font-family: 'Epilogue', sans-serif;">
+              Favoritos de Siempre
+            </span>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-[#2b1613]" style="font-family: 'Bricolage Grotesque', sans-serif;">
+              Nuestras Joyas Mejor Valoradas
+            </h2>
+          </div>
+          
+          <!-- Functional Scroll Knobs -->
+          <div class="flex gap-3">
+            <button 
+              id="carousel-prev"
+              class="w-11 h-11 rounded-full border-2 border-[#964261] text-[#964261] flex items-center justify-center hover:bg-[#964261] hover:text-white active:scale-95 transition-all cursor-pointer shadow-sm bg-white"
+              aria-label="Deslizar anterior"
+            >
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+            </button>
+            <button 
+              id="carousel-next"
+              class="w-11 h-11 rounded-full border-2 border-[#964261] text-[#964261] flex items-center justify-center hover:bg-[#964261] hover:text-white active:scale-95 transition-all cursor-pointer shadow-sm bg-white"
+              aria-label="Deslizar siguiente"
+            >
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Horizontal Polaroid Cards Scroller -->
+        <div 
+          id="favourites-carousel"
+          class="flex gap-8 overflow-x-auto pb-8 snap-x scroll-smooth hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0"
+        >
+          <!-- Dynamic polarized cards injected here by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG SECTION (COLLECTIBLE MENUS) -->
+    <section id="catalog-section" class="bg-[#fff8f6] py-16 md:py-20 relative">
+      <!-- Decorative Scallop Top Divider -->
+      <div class="absolute top-0 w-full scallop-divider-top"></div>
+
+      <div class="max-w-[1240px] mx-auto px-4 md:px-10 mt-6">
+        
+        <!-- Header Title Info -->
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-5xl font-extrabold text-[#2b1613] mb-4" style="font-family: 'Bricolage Grotesque', sans-serif;">
+            Nuestra Colección de Estampas
+          </h2>
+          <p class="text-[#534247] max-w-2xl mx-auto text-sm md:text-base leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">
+            Explora nuestro menú completo de delicias artesanales. Cada bocado viene con su postal coleccionable cargada de memorias, sabores genuinos y dulce historia.
+          </p>
+        </div>
+
+        <!-- Dynamic Filters and Search Panel (Interactive Laptop styled card) -->
+        <div class="bg-[#fff0ee] p-5 md:p-7 rounded-2xl border-2 border-[#d8c1c6] sticker-shadow mb-12 flex flex-col md:flex-row gap-5 items-stretch justify-between">
+          
+          <!-- Real-time search engine -->
+          <div class="flex-1 relative">
+            <label class="sr-only">Buscar delicia</label>
+            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-[#964261]">
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </div>
+            <input 
+              type="text"
+              id="search-input"
+              placeholder="Buscar por sabor, nombre o ingrediente..."
+              class="w-full pl-10 pr-4 py-3 bg-white border border-[#d8c1c6]/70 rounded-full focus:outline-none focus:ring-2 focus:ring-[#964261]/40 text-[#2b1613] text-sm font-medium transition-all"
+            />
+          </div>
+
+          <!-- Sweetness Slider Controls -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 bg-white/70 px-4 py-2 rounded-xl border border-[#d8c1c6]/30">
+            <div class="flex items-center gap-2 text-[#964261] font-semibold text-xs" style="font-family: 'Space Mono', monospace;">
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="21" x2="14" y1="4" y2="4"></line>
+                <line x1="10" x2="3" y1="4" y2="4"></line>
+                <line x1="21" x2="12" y1="12" y2="12"></line>
+                <line x1="8" x2="3" y1="12" y2="12"></line>
+                <line x1="21" x2="16" y1="20" y2="20"></line>
+                <line x1="12" x2="3" y1="20" y2="20"></line>
+                <line x1="14" x2="14" y1="2" y2="6"></line>
+                <line x1="8" x2="8" y1="10" y2="14"></line>
+                <line x1="16" x2="16" y1="18" y2="22"></line>
+              </svg>
+              <span>Nivel de Dulzor Máx:</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <input 
+                type="range" 
+                id="sweetness-slider"
+                min="2" 
+                max="5" 
+                step="1"
+                value="5"
+                class="w-32 h-2 accent-[#964261] rounded-lg appearance-none cursor-pointer bg-gray-200"
+              />
+              <span id="sweetness-badge" class="text-xs font-bold bg-[#ffd9e2] text-[#792b4a] px-2.5 py-0.5 rounded-full border border-[#964261]/20 font-mono">
+                Extremo 🍯
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontally scrolling category chips (Kawaii style) -->
+        <div id="category-chips-container" class="flex gap-2 pb-6 overflow-x-auto hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0 mb-10">
+          <button data-category="all" class="category-chip px-5 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer border bg-[#964261] text-[#ffffff] border-[#964261] shadow-sm scale-102" style="font-family: 'Space Mono', monospace;">🌸 Todos</button>
+          <button data-category="cake" class="category-chip px-5 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer border bg-white text-[#534247] hover:text-[#964261] hover:bg-[#fff0ee] border-[#d8c1c6]/50" style="font-family: 'Space Mono', monospace;">🍰 Pasteles</button>
+          <button data-category="donut" class="category-chip px-5 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer border bg-white text-[#534247] hover:text-[#964261] hover:bg-[#fff0ee] border-[#d8c1c6]/50" style="font-family: 'Space Mono', monospace;">🍩 Donas</button>
+          <button data-category="cupcake" class="category-chip px-5 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer border bg-white text-[#534247] hover:text-[#964261] hover:bg-[#fff0ee] border-[#d8c1c6]/50" style="font-family: 'Space Mono', monospace;">🧁 Cupcakes</button>
+          <button data-category="macaron" class="category-chip px-5 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer border bg-white text-[#534247] hover:text-[#964261] hover:bg-[#fff0ee] border-[#d8c1c6]/50" style="font-family: 'Space Mono', monospace;">🍬 Macarons</button>
+          <button data-category="tart" class="category-chip px-5 py-2.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer border bg-white text-[#534247] hover:text-[#964261] hover:bg-[#fff0ee] border-[#d8c1c6]/50" style="font-family: 'Space Mono', monospace;">🥧 Tartas</button>
+        </div>
+
+        <!-- Matching Items Count -->
+        <div class="flex items-center justify-between mb-6">
+          <p class="text-xs font-bold text-[#534247] uppercase tracking-wider flex items-center gap-1.5 font-mono">
+            <span class="inline-block w-2.5 h-2.5 bg-[#964261] rounded-full animate-ping"></span>
+            <span id="stamps-count">Estampas encontradas (0)</span>
+          </p>
+          <button 
+            id="btn-reset-filters"
+            class="hidden text-xs font-semibold text-[#964261] underline underline-offset-3 hover:opacity-80 cursor-pointer"
+          >
+            Restablecer filtros
+          </button>
+        </div>
+
+        <!-- Sticker Cards Grid layout -->
+        <div id="catalog-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8">
+          <!-- Dynamic Catalog Stamp cards injected here by JavaScript -->
+        </div>
+
+        <div class="flex justify-center mt-14">
+          <button 
+            id="btn-view-all-stamps"
+            class="text-xl md:text-2xl font-bold text-[#964261] border-b-3 border-dashed border-[#964261] hover:text-[#865300] hover:border-[#865300] transition-colors cursor-pointer"
+            style="font-family: 'Epilogue', sans-serif;"
+          >
+            Ver Catálogo de Estampas Completo
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCRAPBOOK SECTION (DIARIES) -->
+    <section id="scrapbook-section" class="bg-[#ffe9e5] py-16 md:py-20 relative overflow-hidden">
+      <!-- Background patterns -->
+      <div class="absolute inset-0 grid-pattern opacity-25"></div>
+
+      <div class="max-w-[1240px] mx-auto px-4 md:px-10 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          
+          <!-- Left panel: Live Scrapbook Collection -->
+          <div class="space-y-8">
+            <div class="flex items-center gap-2">
+              <span class="text-3xl">📓</span>
+              <h2 class="text-3xl md:text-4xl font-extrabold text-[#6b5a60]" style="font-family: 'Bricolage Grotesque', sans-serif;">
+                Libro de Dulces Recuerdos
+              </h2>
+            </div>
+
+
+            <div id="scrapbook-wall" class="space-y-10 relative pt-4">
+              <!-- Dynamic review entries injected by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Right panel: "Write a Memory" Scrapbook Builder form card -->
+          <div class="bg-[#fff8f6] p-6 md:p-8 rounded-[2rem] border-2 border-[#867277] sticker-shadow relative">
+            <div class="absolute top-4 right-4 animate-sparkle-effect">
+              <svg class="w-6 h-6 text-[#964261]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
+
+            <h3 class="text-xl md:text-2xl font-extrabold text-[#964261] mb-1" style="font-family: 'Bricolage Grotesque', sans-serif;">
+              Hacer un Recuerdo
+            </h3>
+            <p class="text-xs text-[#534247] mb-6 leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">
+              Llena una página de nuestro diario escolar retro. ¡Comparte tus impresiones de sabor con nosotros!
+            </p>
+
+            <form id="scrapbook-form" class="space-y-5 text-[#2b1613]">
+              <!-- Name field -->
+              <div>
+                <label class="text-xs font-bold block mb-1.5 uppercase tracking-wide text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                  Tu nombre o apodo
+                </label>
+                <input 
+                  type="text"
+                  id="form-name"
+                  required
+                  placeholder="Ej. Lily, Juan de la Vega..."
+                  class="w-full bg-transparent border-b-2 border-[#d8c1c6] focus:border-[#964261] focus:ring-0 text-lg py-1.5 focus:outline-none transition-colors"
+                  style="font-family: 'Epilogue', sans-serif;"
+                />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Find Us Select Dropdown field -->
+                <div>
+                  <label class="text-xs font-bold block mb-1.5 uppercase tracking-wide text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                    ¿Cómo te enteraste?
+                  </label>
+                  <select 
+                    id="form-method"
+                    class="w-full bg-transparent border-b-2 border-[#d8c1c6] focus:border-[#964261] focus:ring-0 text-sm py-1.5 focus:outline-none transition-colors cursor-pointer"
+                    style="font-family: 'Be Vietnam Pro', sans-serif;"
+                  >
+                    <option value="Walk-in by chance">Paseando por casualidad</option>
+                    <option value="Friend's recommendation">Recomendación de un amigo</option>
+                    <option value="Social Media magic">Magia de redes sociales</option>
+                    <option value="In my dreams">En mis mejores sueños</option>
+                  </select>
+                </div>
+
+                <!-- Tried Dessert dropdown list field -->
+                <div>
+                  <label class="text-xs font-bold block mb-1.5 uppercase tracking-wide text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                    ¿Qué delicia probaste?
+                  </label>
+                  <select 
+                    id="form-tried-product"
+                    class="w-full bg-transparent border-b-2 border-[#d8c1c6] focus:border-[#964261] focus:ring-0 text-sm py-1.5 focus:outline-none transition-colors cursor-pointer"
+                    style="font-family: 'Be Vietnam Pro', sans-serif;"
+                  >
+                    <!-- Options injected dynamically by JS -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- Comment field representing physical lines -->
+              <div>
+                <label class="text-xs font-bold block mb-1.5 uppercase tracking-wide text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                  Escribe tu historia / reseña
+                </label>
+                <textarea 
+                  id="form-comment"
+                  required
+                  placeholder="Cuéntanos un sabor, un recuerdo que te trajo, o qué te pareció..."
+                  rows="3"
+                  class="w-full bg-transparent border-b-2 border-[#d8c1c6]/60 focus:border-[#964261] focus:ring-0 text-lg py-1 focus:outline-none transition-colors leading-relaxed"
+                  style="font-family: 'Epilogue', sans-serif;"
+                ></textarea>
+              </div>
+
+              <!-- Sweetness star cake check rating selector -->
+              <div>
+                <label class="text-xs font-bold block mb-2 uppercase tracking-wide text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                  Calificación de Dulzura Real (1-5 Pasteles)
+                </label>
+                <div id="form-sweetness-container" class="flex gap-2 text-[#964261]">
+                  <button type="button" data-rate="1" class="form-rate-cake sweetness-button text-2xl hover:scale-130 active:scale-95 transition-transform duration-100 cursor-pointer" title="1 pasteles de dulzor"><span>🍰</span></button>
+                  <button type="button" data-rate="2" class="form-rate-cake sweetness-button text-2xl hover:scale-130 active:scale-95 transition-transform duration-100 cursor-pointer" title="2 pasteles de dulzor"><span>🍰</span></button>
+                  <button type="button" data-rate="3" class="form-rate-cake sweetness-button text-2xl hover:scale-130 active:scale-95 transition-transform duration-100 cursor-pointer" title="3 pasteles de dulzor"><span>🍰</span></button>
+                  <button type="button" data-rate="4" class="form-rate-cake sweetness-button text-2xl hover:scale-130 active:scale-95 transition-transform duration-100 cursor-pointer" title="4 pasteles de dulzor"><span>🍰</span></button>
+                  <button type="button" data-rate="5" class="form-rate-cake sweetness-button text-2xl hover:scale-130 active:scale-95 transition-transform duration-100 cursor-pointer" title="5 pasteles de dulzor"><span>🍰</span></button>
+                </div>
+                <p id="sweetness-rating-helper" class="text-[10px] font-mono font-medium text-[#534247]/70 mt-1">
+                  Has seleccionado: 4 de 5 pasteles.
+                </p>
+              </div>
+
+              <!-- Physical polaroid drag drop upload box -->
+              <div>
+                <label class="text-xs font-bold block mb-1.5 uppercase tracking-wide text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                  Adjuntar foto Polaroid (Opcional)
+                </label>
+                
+                <div 
+                  id="drag-drop-zone"
+                  class="border-2 border-dashed border-[#d8c1c6] rounded-xl p-5 text-center cursor-pointer hover:bg-[#ffe9e5] transition-colors duration-200"
+                >
+                  <input 
+                    type="file"
+                    id="form-image"
+                    accept="image/*"
+                    class="hidden"
+                  />
+
+                  <div id="drag-drop-placeholder" class="flex flex-col items-center">
+                    <svg class="w-7 h-7 text-[#867277] mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" x2="12" y1="3" y2="15"></line>
+                    </svg>
+                    <p class="text-xs text-[#867277] font-semibold" style="font-family: 'Space Mono', monospace;">
+                      Suelte su foto aquí o haga clic para buscar
+                    </p>
+                    <p class="text-[9px] text-[#534247]/60 font-mono mt-0.5">
+                      Formatos soportados: JPG, PNG (máx 2MB)
+                    </p>
+                  </div>
+
+                  <div id="form-image-preview" class="hidden flex flex-col items-center">
+                    <div class="w-24 h-24 rounded-md border border-neutral-300 overflow-hidden sticker-shadow p-1 bg-white mb-2">
+                      <img 
+                        id="form-image-preview-img"
+                        src="" 
+                        alt="Previsualización Polaroid" 
+                        class="w-full h-full object-cover rounded-sm" 
+                      />
+                    </div>
+                    <p class="text-xs font-semibold text-green-700">¡Imagen cargada!</p>
+                    <button 
+                      type="button"
+                      id="btn-clear-preview"
+                      class="text-[10px] text-red-600 underline font-semibold mt-1 font-mono cursor-pointer"
+                    >
+                      Remover foto
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action submission button -->
+              <button 
+                type="submit"
+                class="w-full bg-[#964261] text-[#ffffff] py-3 rounded-full font-bold border-4 border-white sticker-shadow active:translate-y-0.5 active:shadow-none hover:opacity-95 transition-all text-center cursor-pointer"
+                style="font-family: 'Bricolage Grotesque', sans-serif;"
+              >
+                Publicar en Libro de Recuerdos
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER AREA -->
+    <footer class="bg-[#ffe2dd] py-12 md:py-16 relative">
+      <div class="absolute top-0 w-full scallop-divider-bottom rotate-180 opacity-50"></div>
+
+      <div class="max-w-[1200px] mx-auto px-4 md:px-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        
+        <!-- Logo Brand copyright -->
+        <div class="text-center md:text-left space-y-2">
+          <div class="text-2xl md:text-3xl font-extrabold text-[#2b1613]" style="font-family: 'Bricolage Grotesque', sans-serif;">
+            Delicias del Ayer
+          </div>
+          <p class="text-sm text-[#534247] max-w-sm leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">
+            © <span id="footer-year">2026</span> Delicias del Ayer - Baked with Nostalgia &amp; Sprinkles.
+          </p>
+        </div>
+
+        <!-- Links cluster -->
+        <div class="flex flex-wrap justify-center gap-6 text-xs font-bold text-[#534247] uppercase tracking-wider" style="font-family: 'Space Mono', monospace;">
+          <a href="#hero-section" id="footer-link-hero" class="hover:text-[#964261] transition-colors">Inicio</a>
+          <a href="#favourites-section" id="footer-link-favourites" class="hover:text-[#964261] transition-colors">Favoritos</a>
+          <a href="#catalog-section" id="footer-link-catalog" class="hover:text-[#964261] transition-colors">Menú</a>
+          <a href="#scrapbook-section" id="footer-link-scrapbook" class="hover:text-[#964261] transition-colors">Libro de Recuerdos</a>
+        </div>
+
+        <!-- Utility interactive triggers -->
+        <div class="flex gap-3">
+          <!-- Share button -->
+          <button 
+            id="btn-share"
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#964261] border border-[#d8c1c6]/60 hover:scale-110 active:scale-95 duration-200 cursor-pointer shadow-xs"
+            title="Compartir pastelería"
+          >
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+              <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+            </svg>
+          </button>
+          <!-- Mail Newsletter list -->
+          <button 
+            id="btn-newsletter"
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#964261] border border-[#d8c1c6]/60 hover:scale-110 active:scale-95 duration-200 cursor-pointer shadow-xs"
+            title="Suscribirse al boletín"
+          >
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </button>
+          <!-- Scroll straight to celestial top -->
+          <button 
+            id="btn-go-top"
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#964261] border border-[#d8c1c6]/60 hover:scale-110 active:scale-95 duration-200 cursor-pointer shadow-xs"
+            title="Volver Arriba"
+          >
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m18 15-6-6-6 6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Love tag watermark annotation -->
+      <div class="text-center mt-10 pt-6 border-t border-[#d8c1c6]/30">
+        <p class="text-sm text-[#964261] font-semibold italic flex items-center justify-center gap-1" style="font-family: 'Epilogue', sans-serif;">
+          <span>Hecho a mano con chispitas extras &amp; mucho amor</span>
+          <span class="animate-pulse">💖</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- BASKET DRAWER OVERLAY -->
+    <div id="cart-drawer-overlay" class="hidden fixed inset-0 z-50 overflow-hidden" role="dialog" aria-modal="true">
+      <!-- Dark backdrop -->
+      <div id="cart-drawer-backdrop" class="absolute inset-0 bg-[#3e2723]/60 backdrop-blur-xs transition-opacity duration-300"></div>
+
+      <!-- Slide-over panel -->
+      <div class="absolute inset-y-0 right-0 max-w-full pl-10 flex">
+        <div class="w-screen max-w-md bg-[#fff8f6] border-l-3 border-[#2b1613]">
+          <div class="h-full flex flex-col justify-between divide-y divide-[#d8c1c6]/40">
+            
+            <!-- Drawer Header -->
+            <div class="px-5 py-5 bg-[#ffe9e5] flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <svg class="w-6 h-6 text-[#964261]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m15 11-1 9"></path>
+                  <path d="m19 11-4-7"></path>
+                  <path d="M2 11h20"></path>
+                  <path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"></path>
+                  <path d="m4.5 11 4-7"></path>
+                  <path d="m9 11 1 9"></path>
+                </svg>
+                <h3 class="text-lg font-bold text-[#6b5a60]" style="font-family: 'Bricolage Grotesque', sans-serif;">
+                  Tu Canasta del Ayer
+                </h3>
+              </div>
+              <button 
+                id="btn-close-cart"
+                class="p-1 rounded-full text-[#534247] hover:bg-white hover:text-[#964261] transition-colors focus:outline-none cursor-pointer"
+              >
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Core Body Section -->
+            <div id="cart-drawer-body" class="flex-1 overflow-y-auto px-5 py-5 scrollbar-thin">
+              <!-- Dynamically rendered cart rows or loaders or checkout screens -->
+            </div>
+
+            <!-- Drawer Footer -->
+            <div id="cart-drawer-footer" class="px-5 py-5 bg-[#ffe2dd] space-y-4">
+              <div class="hidden space-y-2 text-xs font-mono font-medium text-[#534247]">
+                <div class="flex justify-between">
+                  <span>Subtotal repostería:</span>
+                  <span id="cart-subtotal" class="font-bold text-[#2b1613]">$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Cajita retro &amp; moño artesanal:</span>
+                  <span id="cart-packaging" class="font-bold text-[#2b1613]">$0.00</span>
+                </div>
+                <div class="flex justify-between text-sm font-bold text-[#964261] pt-1.5 border-t border-dashed border-[#d8c1c6]/40">
+                  <span>Total final:</span>
+                  <span id="cart-total" class="text-base">$0.00</span>
+                </div>
+              </div>
+
+              <!-- Checkout form -->
+              <form id="checkout-form" class="pt-2">
+                <button 
+                  type="submit"
+                  class="w-full bg-[#964261] text-[#ffffff] text-center py-3.5 rounded-full font-bold border-3 border-white sticker-shadow hover:translate-y-0.5 active:translate-y-1 transition-all cursor-pointer flex items-center justify-center gap-2"
+                  style="font-family: 'Bricolage Grotesque', sans-serif;"
+                >
+                  <span>Enviar Pedido de Recuerdos</span>
+                  <svg class="w-4 h-4 fill-white text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"></path>
+                  </svg>
+                </button>
+              </form>
+
+              <p class="text-[10px] text-center text-[#534247]/70 font-mono leading-relaxed max-w-xs mx-auto">
+                🏡 Al comprar apoyas directamente a panaderos locales jubilados y se dona 1 dona por ticket.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGIN MODAL INTERNALS -->
+    <div id="login-modal" class="hidden fixed inset-0 z-55 flex items-center justify-center p-4">
+      <!-- Overlay backdrop -->
+      <div id="login-modal-backdrop" class="absolute inset-0 bg-[#3e2723]/60 backdrop-blur-xs transition-opacity cursor-pointer"></div>
+
+      <!-- Modal panel -->
+      <div class="relative bg-[#fff8f6] max-w-sm w-full p-6 md:p-8 rounded-[2rem] border-3 border-[#2b1613] sticker-shadow z-10 rotate-[0.5deg]">
+        <button 
+          id="btn-close-login"
+          class="absolute top-4 right-4 p-1 rounded-full text-[#534247] hover:bg-[#ffe9e5] hover:text-[#964261] transition-all cursor-pointer"
+        >
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+
+        <div id="login-form-container">
+          <div class="text-center mb-6">
+            <span class="text-3xl select-none">🔑</span>
+            <h3 class="text-xl md:text-2xl font-bold text-[#964261] mt-2" style="font-family: 'Bricolage Grotesque', sans-serif;">
+              Iniciar Sesión Dulce
+            </h3>
+            <p class="text-xs text-[#534247] mt-1.5 leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">
+              Únete a nuestro club de repostería para guardar tus estampas favoritas y agilizar tus retiros.
+            </p>
+          </div>
+
+          <form id="login-form" class="space-y-4">
+            <!-- Nickname input -->
+            <div>
+              <label class="text-[11px] font-bold block mb-1 uppercase tracking-wider text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                Tu apodo repostero
+              </label>
+              <input 
+                type="text"
+                id="login-nickname"
+                required
+                placeholder="Ej. Chepito, DulceMargarita"
+                class="w-full bg-white border-b-2 border-[#d8c1c6] focus:border-[#964261] focus:ring-0 text-lg px-2 py-1 focus:outline-none transition-colors"
+                style="font-family: 'Epilogue', sans-serif;"
+              />
+            </div>
+
+            <!-- Email input -->
+            <div>
+              <label class="text-[11px] font-bold block mb-1 uppercase tracking-wider text-[#534247]" style="font-family: 'Space Mono', monospace;">
+                Correo electrónico
+              </label>
+              <input 
+                type="email"
+                id="login-email"
+                required
+                placeholder="ejemplo@correo.com"
+                class="w-full bg-white border-b-2 border-[#d8c1c6] focus:border-[#964261] focus:ring-0 text-lg px-2 py-1 focus:outline-none transition-colors"
+                style="font-family: 'Epilogue', sans-serif;"
+              />
+            </div>
+
+            <button 
+              type="submit"
+              class="w-full bg-[#964261] text-[#ffffff] py-3 rounded-full font-bold border-2 border-white sticker-shadow active:translate-y-1 active:shadow-none transition-all cursor-pointer mt-2"
+              style="font-family: 'Bricolage Grotesque', sans-serif;"
+            >
+              Ingresar al Club
+            </button>
+          </form>
+
+          <div class="text-center mt-4">
+            <p class="text-[10px] font-mono text-[#534247]">
+              * No se requiere contraseña. Usamos magia de chispas.
+            </p>
+          </div>
+        </div>
+
+        <div id="login-success-container" class="hidden text-center py-6">
+          <div class="w-14 h-14 bg-[#ffd9e2] text-[#722544] rounded-full flex items-center justify-center text-2xl mx-auto mb-4 animate-bounce border border-[#964261]/25">
+            🧁
+          </div>
+          <h4 id="welcome-message-title" class="text-lg font-bold text-[#964261] mb-2" style="font-family: 'Bricolage Grotesque', sans-serif;">
+            ¡Bienvenido!
+          </h4>
+          <p class="text-xs text-[#534247] max-w-xs mx-auto leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">
+            Te estamos registrando en el Libro Dorado de Clientes de Delicias del Ayer... ¡Prepárate para recibir tus beneficios!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="detail-modal" class="hidden fixed inset-0 z-55 flex items-center justify-center p-4">
+      <div id="detail-modal-backdrop" class="absolute inset-0 bg-[#3e2723]/60 backdrop-blur-xs transition-opacity cursor-pointer"></div>
+
+      <!-- retro model card container -->
+      <div class="relative bg-[#fff8f6] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-[2.5rem] border-3 border-[#2b1613] sticker-shadow z-10 flex flex-col md:flex-row gap-6">
+        <button 
+          id="btn-close-detail"
+          class="absolute top-4 right-4 p-1.5 rounded-full text-[#534247] hover:bg-[#ffe9e5] hover:text-[#964261] transition-all cursor-pointer z-10 bg-white shadow-xs"
+        >
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+
+        <div class="flex-1 flex flex-col justify-between">
+          <div>
+            <!-- Header Stamp card metadata -->
+            <div class="flex items-center gap-2 mb-3">
+              <span id="detail-emoji" class="text-2xl">🍰</span>
+              <span id="detail-card-number" class="text-[10px] uppercase font-mono tracking-wider text-[#722544] bg-[#ffd9e2] px-3 py-1 rounded-full border border-[#964261]/20 font-bold">
+                Coleccionable #0000
+              </span>
+            </div>
+
+            <!-- Product Polaroid banner -->
+            <div class="relative w-full h-48 md:h-56 bg-white rounded-2xl border-2 border-[#d8c1c6] overflow-hidden shadow-xs mb-4 p-2">
+              <img 
+                id="detail-img"
+                src="" 
+                alt="Product Name" 
+                class="w-full h-full object-cover rounded-xl"
+              />
+              <div id="detail-price" class="hidden absolute top-4 right-4 bg-[#f09b16] text-white px-3 py-0.5 rounded-md border border-white font-mono text-xs font-bold sticker-shadow rotate-3 text-sm">
+                $0.00
+              </div>
+            </div>
+
+            <!-- Title content -->
+            <h3 id="detail-title" class="text-xl md:text-2xl font-extrabold text-[#2b1613] leading-tight" style="font-family: 'Bricolage Grotesque', sans-serif;">
+              Product Name
+            </h3>
+            <p id="detail-flavor" class="text-xs font-bold text-[#964261] uppercase mt-0.5 tracking-wider" style="font-family: 'Space Mono', monospace;">
+              Double Glazed & Sprinkles
+            </p>
+
+            <p id="detail-description" class="text-xs text-[#534247] mt-3 leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">
+              Product summary description...
+            </p>
+
+            <!-- Ingredients lists -->
+            <div class="mt-4 bg-white p-4 rounded-xl border border-[#d8c1c6]/60">
+              <h5 class="text-[11px] font-bold text-[#2b1613] mb-2 uppercase tracking-wide border-b border-dashed border-[#d8c1c6]/35 pb-1" style="font-family: 'Space Mono', monospace;">
+                📋 Ingredientes de la Receta Secreta
+              </h5>
+              <div id="detail-ingredients-container" class="flex flex-wrap gap-1.5 pt-1">
+                <!-- ingredients tags dynamically injected style -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom selector panel -->
+          <div class="mt-5 pt-4 border-t border-dashed border-[#d8c1c6]/30 flex flex-col sm:flex-row items-center gap-4 justify-between">
+            <!-- Quantity counter -->
+            <div class="flex items-center gap-3 bg-[#ffe9e5] py-1.5 px-3 rounded-full border border-[#d8c1c6]">
+              <button 
+                id="btn-detail-qty-minus"
+                class="p-1 rounded-full text-[#6b5a60] hover:text-[#964261] transition-colors cursor-pointer"
+              >
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" x2="19" y1="12" y2="12"></line>
+                </svg>
+              </button>
+              <span id="detail-qty-value" class="font-mono text-sm font-bold w-6 text-center text-[#6b5a60]">1</span>
+              <button 
+                id="btn-detail-qty-plus"
+                class="p-1 rounded-full text-[#6b5a60] hover:text-[#964261] transition-colors cursor-pointer"
+              >
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" x2="12" y1="5" y2="19"></line>
+                  <line x1="5" x2="19" y1="12" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+
+            <!-- submit button -->
+            <button
+              id="btn-add-detail-to-cart"
+              class="w-full sm:w-auto flex-1 bg-[#964261] text-[#ffffff] font-bold px-6 py-3 rounded-full border-2 border-white sticker-shadow hover:translate-y-0.5 hover:shadow-none active:translate-y-1 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
+              style="font-family: 'Bricolage Grotesque', sans-serif;"
+            >
+              <span>Agregar a la canasta</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOM DELETION CONFIRMATION MODAL -->
+    <div id="delete-confirm-modal" class="hidden fixed inset-0 z-55 flex items-center justify-center p-4">
+      <div id="delete-confirm-modal-backdrop" class="absolute inset-0 bg-[#2b1613]/50 backdrop-blur-xs transition-opacity cursor-pointer"></div>
+      <div class="relative bg-white rounded-[2rem] p-6 max-w-sm w-full border-3 border-[#2b1613] sticker-shadow z-10 text-center animate-scale-up">
+        <div class="text-4xl mb-3">🗑️</div>
+        <h3 class="font-display-lg text-lg font-extrabold text-[#964261] mb-2" style="font-family: 'Bricolage Grotesque', sans-serif;">¿Eliminar este recuerdo?</h3>
+        <p class="text-xs text-[#534247] mb-6 leading-relaxed" style="font-family: 'Be Vietnam Pro', sans-serif;">¿Estás seguro de que deseas eliminar este recuerdo del ayer de forma permanente de tu libro? Esta acción no se puede deshacer.</p>
+        <div class="flex gap-3 justify-center">
+          <button 
+            id="btn-confirm-delete-cancel" 
+            class="px-5 py-2 bg-neutral-100 hover:bg-neutral-250 text-neutral-600 rounded-full text-xs font-semibold cursor-pointer border border-neutral-300 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button 
+            id="btn-confirm-delete-ok" 
+            class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-full text-xs font-semibold cursor-pointer border border-red-700 transition-colors shadow-xs"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAMPS ALBUM MODAL (GIGANTE) -->
+    <div id="stamps-album-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div id="stamps-album-modal-backdrop" class="absolute inset-0 bg-[#2b1613]/55 backdrop-blur-md transition-opacity cursor-pointer"></div>
+      
+      <!-- Album Container -->
+      <div class="relative bg-[#fffdfb] max-w-5xl w-full max-h-[92vh] overflow-y-auto p-5 md:p-8 rounded-[2rem] border-3 border-[#2b1613] sticker-shadow z-10 flex flex-col justify-between">
+        <!-- Close button -->
+        <button 
+          id="btn-close-stamps-album"
+          class="absolute top-4 right-4 p-1.5 rounded-full text-[#534247] hover:bg-[#ffe9e5] hover:text-[#964261] transition-all cursor-pointer z-10 bg-white shadow-xs border border-[#d8c1c6]"
+        >
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+
+        <!-- Album Cover Header -->
+        <div class="text-center mb-6 pb-4 border-b-2 border-dashed border-[#d8c1c6] mt-2">
+          <div class="inline-block bg-[#ffd9e2] text-[#964261] text-xs font-bold font-mono px-3 py-1 rounded-full border border-[#964261]/20 uppercase tracking-widest mb-1.5 animate-pulse">
+            📔 Álbum de Estampas Expandido
+          </div>
+          <h3 class="text-2xl md:text-3xl font-extrabold text-[#2b1613] leading-tight" style="font-family: 'Bricolage Grotesque', sans-serif;">
+            Colección Dorada de Recuerdos Comestibles
+          </h3>
+          <p class="text-xs md:text-sm text-[#534247] mt-1.5 max-w-2xl mx-auto" style="font-family: 'Be Vietnam Pro', sans-serif;">
+            Un rincón nostálgico ampliado para coleccionistas. Explora detalles premium de nuestras recetas tradicionales, conéctate con nuestro dulce legado, y llévate tu estampa favorita a la canasta.
+          </p>
+        </div>
+
+        <!-- Huge interactive book Layout inside the modal -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 overflow-y-auto min-h-0 pr-2">
+          
+          <!-- Left Wing: Stats & Nostalgia (4 cols) -->
+          <div class="lg:col-span-4 bg-[#fff0ee] p-5 rounded-3xl border border-[#d8c1c6] flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <h4 class="text-xs uppercase font-extrabold tracking-wider text-[#964261] font-mono border-b border-[#964261]/20 pb-1.5">
+                Datos del Álbum
+              </h4>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center bg-white/80 p-3 rounded-xl border border-[#d8c1c6]/30">
+                  <span class="text-xs font-semibold text-[#534247]">Total Recetas/Estampas:</span>
+                  <span id="album-total-count" class="font-mono text-xs font-bold text-[#964261] bg-[#ffd9e2] px-2 py-0.5 rounded-full">0</span>
+                </div>
+                <div class="flex justify-between items-center bg-white/80 p-3 rounded-xl border border-[#d8c1c6]/30">
+                  <span class="text-xs font-semibold text-[#534247]">Promedio Dulzura:</span>
+                  <span class="font-mono text-xs font-bold text-[#865300] bg-[#ffeedd] px-2 py-0.5 rounded-full">3.7 / 5 🍰</span>
+                </div>
+                <div class="flex justify-between items-center bg-white/80 p-3 rounded-xl border border-[#d8c1c6]/30">
+                  <span class="text-xs font-semibold text-[#534247]">Categorías Activas:</span>
+                  <span class="font-mono text-xs font-bold text-teal-800 bg-teal-100 px-2 py-0.5 rounded-full">5</span>
+                </div>
+              </div>
+
+              <!-- Retro decorative note card -->
+              <div class="relative bg-[#fffde0] p-4 rounded-2xl border border-yellow-250 shadow-xs rotate-[-1.5deg] text-xs leading-relaxed text-[#5c4923] space-y-2 mt-4">
+                <div class="absolute -top-3 left-4 w-12 h-5 bg-[#fff8a3]/80 border border-yellow-200 -rotate-3"></div>
+                <p class="font-bold">✨ El Secreto del Ayer:</p>
+                <p>Nuestras recetas provienen de libretas escritas a mano con tinta nostálgica. Cada vez que disfrutas una de estas delicias, estás guardando un dulce pedazo de historia.</p>
+              </div>
+            </div>
+
+            <div class="text-center pt-2">
+              <span class="text-4xl">🕰️</span>
+              <p class="text-[10px] font-mono text-[#534247] mt-1.5">Delicias del Ayer S.A. 🕰️</p>
+            </div>
+          </div>
+
+          <!-- Right Wing: Large Stamp Portfolio Grid (8 cols) -->
+          <div class="lg:col-span-8 flex flex-col space-y-4">
+            <div class="flex justify-between items-center bg-neutral-50 px-4 py-2.5 rounded-xl border border-neutral-200">
+              <span id="album-status-label" class="text-xs font-semibold text-[#2b1613]">Todas las estampas activas</span>
+              <span class="text-[11px] font-mono text-[#534247] bg-white border border-neutral-200 px-2 py-0.5 rounded-md">Vistas ampliadas</span>
+            </div>
+            
+            <div id="album-stamps-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4 max-h-[50vh] overflow-y-auto pr-1">
+              <!-- Giant high-fidelity stamps injected by JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer actions inside the Album -->
+        <div class="mt-6 pt-4 border-t border-dashed border-[#d8c1c6]/40 flex flex-col sm:flex-row gap-4 justify-between items-center text-xs text-[#534247]">
+          <span style="font-family: 'Space Mono', monospace;">* Haz clic en cualquier estampa para ver su receta secreta e ingredientes detallados.</span>
+          <button 
+            id="btn-close-stamps-album-bottom" 
+            class="w-full sm:w-auto bg-[#964261] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#964261]/95 transition-colors cursor-pointer text-center border-2 border-white sticker-shadow"
+          >
+            Cerrar Álbum
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module script for mounting standard dynamic DOM script logic -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
